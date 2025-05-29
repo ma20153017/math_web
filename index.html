@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>矩阵切变变换演示</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>矩阵切变变换演示</h1>
+    </header>
+    
+    <main>
+        <div class="container">
+            <div class="control-panel">
+                <h2>控制面板</h2>
+                <div class="coordinates-input">
+                    <h3>自定义坐标点</h3>
+                    <div class="point-input">
+                        <label>点A (左上):</label>
+                        <input type="number" id="pointAX" value="-50" step="10"> 
+                        <input type="number" id="pointAY" value="40" step="10">
+                    </div>
+                    <div class="point-input">
+                        <label>点B (右上):</label>
+                        <input type="number" id="pointBX" value="50" step="10"> 
+                        <input type="number" id="pointBY" value="40" step="10">
+                    </div>
+                    <div class="point-input">
+                        <label>点C (右下):</label>
+                        <input type="number" id="pointCX" value="50" step="10"> 
+                        <input type="number" id="pointCY" value="-40" step="10">
+                    </div>
+                    <div class="point-input">
+                        <label>点D (左下):</label>
+                        <input type="number" id="pointDX" value="-50" step="10"> 
+                        <input type="number" id="pointDY" value="-40" step="10">
+                    </div>
+                    <button id="applyCoordinatesBtn">应用坐标</button>
+                </div>
+                
+                <div class="control-group">
+                    <label for="shearX">水平切变 (k<sub>x</sub>):</label>
+                    <input type="range" id="shearX" min="-2" max="2" step="0.1" value="0">
+                    <span id="shearXValue">0</span>
+                </div>
+                <div class="control-group">
+                    <label for="shearY">垂直切变 (k<sub>y</sub>):</label>
+                    <input type="range" id="shearY" min="-2" max="2" step="0.1" value="0">
+                    <span id="shearYValue">0</span>
+                </div>
+                <div class="matrix-display">
+                    <h3>切变矩阵</h3>
+                    <div class="matrix">
+                        <div class="matrix-row">
+                            <span id="m11">1</span>
+                            <span id="m12">0</span>
+                        </div>
+                        <div class="matrix-row">
+                            <span id="m21">0</span>
+                            <span id="m22">1</span>
+                        </div>
+                    </div>
+                </div>
+                <button id="resetBtn">重置</button>
+                <button id="animateBtn">动画演示</button>
+            </div>
+            
+            <div class="visualization-container">
+                <div class="canvas-container">
+                    <canvas id="transformCanvas"></canvas>
+                </div>
+                
+                <div class="formula-visualization">
+                    <h3>变换公式可视化</h3>
+                    <div id="focusPoint" class="focus-point">
+                        <h4>正在演示点: <span id="currentPoint">A</span></h4>
+                        <button id="nextPointBtn">下一个点</button>
+                    </div>
+                    <div id="dynamicFormula" class="dynamic-formula">
+                        <div class="formula-row">
+                            <span class="formula-label">X' = </span>
+                            <div class="formula-part x-part">X</div>
+                            <div class="formula-part kx-part"> + k<sub>x</sub> × Y</div>
+                            <span class="formula-equals"> = </span>
+                            <div class="formula-result x-result"></div>
+                        </div>
+                        <div class="formula-row">
+                            <span class="formula-label">Y' = </span>
+                            <div class="formula-part ky-part">k<sub>y</sub> × X</div>
+                            <div class="formula-part y-part"> + Y</div>
+                            <span class="formula-equals"> = </span>
+                            <div class="formula-result y-result"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="data-panel">
+                <h2>数据面板</h2>
+                <div class="coordinates">
+                    <h3>原始坐标</h3>
+                    <ul id="originalCoords"></ul>
+                </div>
+                <div class="coordinates">
+                    <h3>变换后坐标</h3>
+                    <ul id="transformedCoords"></ul>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="theory">
+            <h2>切变变换理论</h2>
+            <p>切变变换是线性变换的一种，它保持了平行线的平行性，但会改变角度和距离。在二维平面中，切变变换可以用以下矩阵表示：</p>
+            <div class="theory-matrix">
+                <div class="matrix">
+                    <div class="matrix-row">
+                        <span>1</span>
+                        <span>k<sub>x</sub></span>
+                    </div>
+                    <div class="matrix-row">
+                        <span>k<sub>y</sub></span>
+                        <span>1</span>
+                    </div>
+                </div>
+            </div>
+            <p>其中，k<sub>x</sub>是水平切变参数，k<sub>y</sub>是垂直切变参数。</p>
+            <p>点坐标的变换公式为：</p>
+            <p>X' = X + k<sub>x</sub> × Y</p>
+            <p>Y' = k<sub>y</sub> × X + Y</p>
+        </div>
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html> 

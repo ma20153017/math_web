@@ -1,0 +1,341 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Microsoft YaHei', 'SimHei', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h1, h2, h3 {
+    color: #2c3e50;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 20px;
+}
+
+.control-panel, .data-panel {
+    flex: 1;
+    min-width: 250px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.visualization-container {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    min-width: 500px;
+    gap: 20px;
+}
+
+.canvas-container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+canvas {
+    border: 1px solid #ddd;
+    background-color: #fff;
+    max-width: 100%;
+}
+
+.control-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="range"] {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+/* 坐标输入样式 */
+.coordinates-input {
+    margin-bottom: 20px;
+    background-color: #f5f5f5;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.point-input {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.point-input label {
+    width: 100px;
+    margin-bottom: 0;
+}
+
+.point-input input[type="number"] {
+    width: 60px;
+    padding: 5px;
+    margin-right: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#applyCoordinatesBtn {
+    background-color: #2ecc71;
+    margin-top: 10px;
+    width: 100%;
+}
+
+#applyCoordinatesBtn:hover {
+    background-color: #27ae60;
+}
+
+button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-top: 10px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+.matrix-display {
+    margin: 20px 0;
+}
+
+.matrix {
+    display: inline-flex;
+    flex-direction: column;
+    border-left: 2px solid #333;
+    border-right: 2px solid #333;
+    padding: 5px 10px;
+    position: relative;
+    margin: 10px 0;
+}
+
+.matrix:before, .matrix:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: transparent;
+}
+
+.matrix-row {
+    display: flex;
+    justify-content: center;
+}
+
+.matrix-row span {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.coordinates {
+    margin-bottom: 20px;
+}
+
+.coordinates ul {
+    list-style-type: none;
+    padding-left: 10px;
+}
+
+.coordinates li {
+    margin-bottom: 5px;
+    font-family: monospace;
+}
+
+/* 公式可视化样式 */
+.formula-visualization {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dynamic-formula {
+    margin: 20px 0;
+    font-size: 20px;
+}
+
+.formula-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.formula-label {
+    font-weight: bold;
+    margin-right: 10px;
+    font-size: 24px;
+}
+
+.formula-part {
+    padding: 8px 12px;
+    border-radius: 4px;
+    margin: 0 5px;
+    transition: all 0.3s;
+    font-size: 22px;
+}
+
+.x-part {
+    background-color: #e8f4f8;
+    color: #0066cc;
+}
+
+.y-part {
+    background-color: #f8e8f4;
+    color: #cc0066;
+}
+
+.kx-part {
+    background-color: #e8f8f4;
+    color: #00a67e;
+}
+
+.ky-part {
+    background-color: #f4f8e8;
+    color: #a67e00;
+}
+
+.formula-equals {
+    margin: 0 10px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.formula-result {
+    font-weight: bold;
+    padding: 8px 15px;
+    background-color: #fffbe8;
+    border-radius: 4px;
+    min-width: 80px;
+    text-align: center;
+    font-size: 22px;
+}
+
+/* 高亮动画效果 */
+.highlight {
+    animation: highlight-pulse 1s ease-in-out;
+    transform: scale(1.05);
+    box-shadow: 0 0 8px rgba(0,0,0,0.3);
+    font-weight: bold;
+}
+
+@keyframes highlight-pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1.05); }
+}
+
+.focus-point {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 12px 15px;
+    background-color: #f0f4f8;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.focus-point h4 {
+    margin: 0;
+    font-size: 18px;
+}
+
+#currentPoint {
+    color: #ff6600;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+#nextPointBtn {
+    margin: 0;
+    background-color: #9b59b6;
+    padding: 8px 20px;
+    font-size: 16px;
+}
+
+#nextPointBtn:hover {
+    background-color: #8e44ad;
+}
+
+footer {
+    margin-top: 50px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.theory {
+    margin-bottom: 30px;
+}
+
+.theory-matrix {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+@media (max-width: 992px) {
+    .visualization-container {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    
+    .control-panel, .canvas-container, .data-panel, .formula-visualization {
+        width: 100%;
+    }
+} 
